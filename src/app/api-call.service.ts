@@ -7,9 +7,7 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class ApiCallService {
 
-  url = "http://localhost:8080/infos";
-  url2 = "http://localhost:8080/setLoginInfos";
-
+  url = "http://localhost:8089/get/getAll";
   constructor(private http: HttpClient) {
    }
 
@@ -20,11 +18,11 @@ export class ApiCallService {
       'Authorization': 'Basic ' + btoa('light_app:123456')
     })
   }
-   getResponse(){
+   getAllData(){
     return this.http.get(this.url,this.httpOptions);
   }
   insertNewUser(post){
-    return this.http.post(this.url2,post, this.httpOptions);
+    return this.http.post(this.url,post, this.httpOptions);
   }
   // getStatements(id){
   //   return this.http.get("http://localhost:8080/statements/"+id,this.httpOptions);

@@ -1,3 +1,4 @@
+<div class="container">
 <table mdbTable>
     <thead class="grey lighten-1 black-text">
       <tr>
@@ -5,11 +6,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr mdbTableCol *ngFor="let el of elements">
-        <th scope="row">{{el.id}}</th>
-        <td>{{el.first}}</td>
-        <td>{{el.last}}</td>
-        <td>{{el.handle}}</td>
+      <tr mdbTableCol *ngFor="let light of lights">
+        <th scope="row">{{light.id}}</th>
+        <td>{{light.lightInfo.zoneNo}}</td>
+        <td>{{light.lightInfo.lightDBIdentity.dbNo}}</td>
+        <td>{{light.lightInfo.lightDBIdentity.lightNo}}</td>
+        <td>{{light.isTurnedOn}}</td>
       </tr>
     </tbody>
   </table>
+</div>
