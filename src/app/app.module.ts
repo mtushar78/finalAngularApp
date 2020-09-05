@@ -9,7 +9,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LightListComponent } from './light-list/light-list.component';
-import{ApiCallService} from './api-call.service'
+import{ApiCallService} from './api-call.service';
+import {HttpClientModule} from '@angular/common/http'
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import{ApiCallService} from './api-call.service'
       {path:'list', component: LightListComponent}     
       
     ]),
+    HttpClientModule 
   ],
   exports: [RouterModule],
   providers: [WebSocketService,ApiCallService],

@@ -16,9 +16,27 @@ lights:any=[];
 
   // Subscribe to notification topic
         stompClient.subscribe('/topic/notification', notifications => {
-          console.log("notification : ", JSON.parse(notifications.body));
-          this.lights =JSON.parse(notifications.body);
-            
+          
+          var singleLight = JSON.parse(notifications.body);
+          console.log("notification : ", singleLight);
+          var counter=0;
+          for(let i in this.lights){
+            if(this.lights[i].id == singleLight.id){
+              this.lights[i].isTurnedOn = singleLight.isTurnedOn;
+              console.log("updating a single Data : ", this.lights[i]);
+
+                if(this.lights[i].isTurnedOn == 1){
+                  this.lights[i].isTurnedOn = "ON";
+                }else{
+                  this.lights[i].isTurnedOn = "OFF";
+                }
+
+              counter++;
+            }
+          }
+          if(counter==0){
+            console.log("notification : New Entry needed", JSON.parse(notifications.body));
+          }
         })
     });
   }
@@ -27,6 +45,14 @@ lights:any=[];
     this.apiCallService.getAllData().subscribe(data =>{
       console.log("all Data: ", data);
       this.lights = data;
+      for(let x in this.lights){
+        if(this.lights[x].isTurnedOn == 1){
+          this.lights[x].isTurnedOn = "ON";
+        }else{
+          this.lights[x].isTurnedOn = "OFF";
+        }
+        
+      }
     })
   }
 
