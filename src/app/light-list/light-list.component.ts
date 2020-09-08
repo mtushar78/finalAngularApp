@@ -8,8 +8,9 @@ import {ApiCallService} from '../api-call.service'
   styleUrls: ['./light-list.component.scss']
 })
 export class LightListComponent implements OnInit {
-headElements = ['ID', 'Zone', 'DB', 'Light', 'Status'];
+headElements = ['Zone', 'DB', 'Light', 'Status'];
 lights:any=[];
+p: number = 1;
   constructor(private webSocket:WebSocketService, private apiCallService: ApiCallService) { 
     let stompClient = this.webSocket._connect();
     stompClient.connect({}, frame => {
@@ -30,12 +31,22 @@ lights:any=[];
                 }else{
                   this.lights[i].isTurnedOn = "OFF";
                 }
-
               counter++;
             }
           }
           if(counter==0){
-            console.log("notification : New Entry needed", JSON.parse(notifications.body));
+            var len = this.lights.length;
+            this.lights[len]=singleLight;
+
+            if(this.lights[len].isTurnedOn == 1){
+
+              this.lights[len].isTurnedOn = "ON";
+            }
+            else{
+
+              this.lights[len].isTurnedOn = "OFF";
+            }
+            console.log("notification : New Entry needed", this.lights[this.lights.length-1]);
           }
         })
     });

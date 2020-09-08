@@ -1,18 +1,38 @@
-<div class="container">
-<table mdbTable>
-    <thead class="grey lighten-1 black-text">
-      <tr>
-        <th *ngFor="let head of headElements" scope="col">{{head}} </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr mdbTableCol *ngFor="let light of lights">
-        <th scope="row">{{light.id}}</th>
-        <td>{{light.lightInfo.zoneNo}}</td>
-        <td>{{light.lightInfo.lightDBIdentity.dbNo}}</td>
-        <td>{{light.lightInfo.lightDBIdentity.lightNo}}</td>
-        <td>{{light.isTurnedOn}}</td>
-      </tr>
-    </tbody>
-  </table>
+
+<div class="main-content w-100">
+  <div class="container-fluid">
+      <div class="row ">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title ">List Of Lights</h4>
+                      <p class="card-category"> Shows according to ZONE-DB-LIGHT</p>
+                  </div>
+                  <div class="card-body">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                      <div class="table-responsive">
+                       
+                          <table class="table" id="lighttbl">
+                              <thead class=" text-primary">
+                                <tr>
+                                    <th *ngFor="let head of headElements" scope="col">{{head}} </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr mdbTableCol *ngFor="let light of lights | paginate: { itemsPerPage: 5, currentPage: p }">
+                                    <td>{{light.lightInfo.zoneNo}}</td>
+                                    <td>{{light.lightInfo.lightDBIdentity.dbNo}}</td>
+                                    <td>{{light.lightInfo.lightDBIdentity.lightNo}}</td>
+                                    <td>{{light.isTurnedOn}}</td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                          
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
 </div>
+
